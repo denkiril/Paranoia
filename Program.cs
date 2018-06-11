@@ -31,6 +31,8 @@ As the computer investigator, write a program, which reads the transaction logs,
 and prints the exact month containing the "unusual" activities.
 The number of lines in the transaction log, as well as the reasons, are not fixed and can contain other values.*/
 
+//You can play with numbers in entries[] in Main()
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,6 +102,7 @@ namespace Paranoia
 
             public void PrintUnusualMonth()
             {
+                bool consistent = true;
                 List<string> reasons = new List<string>();
                 foreach (var entry in expenses)
                     if (!reasons.Contains(entry.reason))
@@ -116,9 +119,11 @@ namespace Paranoia
                         if (r_amount.Value > val_average)
                         {
                             Console.WriteLine("Unusual month is {0} with {1} {2}", r_amount.Key, reason, r_amount.Value);
-                            break;
+                            consistent = false;
                         }
                 }
+
+                if (consistent) Console.WriteLine("All expenses are consistent.");
             }
         }
 
@@ -129,11 +134,11 @@ namespace Paranoia
                 "Jul SLR 4 M",
                 "Jul ENR 800 K",
                 "Jul OTR 1200 K",
-                "Aug SLR 5000 K",
+                "Aug SLR 4000 K",
                 "Aug ENR 800 K",
                 "Aug OTR 1190 K",
                 "Sep SLR 4000 K",
-                "Sep ENR 810 K",
+                "Sep ENR 800 K",
                 "Sep OTR 1190 K"
                 };
 
